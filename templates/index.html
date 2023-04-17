@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask App</title>
+  </head>
+  <body>
+    <p>Hello world</p>
+    <h1>My Guitars</h1>
+    <form method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name">
+      <br>
+      <label for="isElectric">Is electric:</label>
+      <input type="checkbox" name="isElectric" id="isElectric">
+      <br>
+      <label for="price">Price:</label>
+      <input type="number" name="price" id="price">
+      <br>
+      <label for="color">Color:</label>
+      <input type="text" name="color" id="color">
+      <br>
+      <button type="submit">Add guitar</button>
+    </form>
+    <hr>
+    <ul>
+        {% for guitar in guitars %}
+        <li>
+          {{ guitar['name'] }} - 
+          {% if guitar['isElectric'] %}
+          Electric - 
+          {% else %}
+          Acoustic - 
+          {% endif %}
+          ${{ guitar['price'] }} - 
+          {{ guitar['color'] }}
+          <a href="{{ url_for('delete', id=guitar['_id']) }}">Delete</a>
+        </li>
+        {% endfor %}
+      </ul>
+  </body>
+</html>
